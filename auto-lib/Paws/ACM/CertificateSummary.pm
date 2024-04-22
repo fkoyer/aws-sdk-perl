@@ -2,7 +2,23 @@
 package Paws::ACM::CertificateSummary;
   use Moose;
   has CertificateArn => (is => 'ro', isa => 'Str');
+  has CreatedAt => (is => 'ro', isa => 'Str');
   has DomainName => (is => 'ro', isa => 'Str');
+  has Exported => (is => 'ro', isa => 'Bool');
+  has ExtendedKeyUsages => (is => 'ro', isa => 'ArrayRef[Str|Undef]');
+  has HasAdditionalSubjectAlternativeNames => (is => 'ro', isa => 'Bool');
+  has ImportedAt => (is => 'ro', isa => 'Str');
+  has InUse => (is => 'ro', isa => 'Bool');
+  has IssuedAt => (is => 'ro', isa => 'Str');
+  has KeyAlgorithm => (is => 'ro', isa => 'Str');
+  has KeyUsages => (is => 'ro', isa => 'ArrayRef[Str|Undef]');
+  has NotAfter => (is => 'ro', isa => 'Str');
+  has NotBefore => (is => 'ro', isa => 'Str');
+  has RenewalEligibility => (is => 'ro', isa => 'Str');
+  has RevokedAt => (is => 'ro', isa => 'Str');
+  has Status => (is => 'ro', isa => 'Str');
+  has SubjectAlternativeNameSummaries => (is => 'ro', isa => 'ArrayRef[Str|Undef]');
+  has Type => (is => 'ro', isa => 'Str');
 
 1;
 
@@ -49,13 +65,82 @@ C<arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-1234567890
 For more information about ARNs, see Amazon Resource Names (ARNs)
 (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 
+=head2 CreatedAt => Str
+
+The time at which the certificate was requested.
 
 =head2 DomainName => Str
 
 Fully qualified domain name (FQDN), such as www.example.com or
 example.com, for the certificate.
 
+=head2 Exported => Bool
 
+Indicates whether the certificate has been exported.
+This value exists only when the certificate type is PRIVATE.
+
+=head2 ExtendedKeyUsages => ArrayRef[Str|Undef]
+
+A list of Extended Key Usage X.509 v3 extension objects.
+
+=head2 HasAdditionalSubjectAlternativeNames => Bool
+
+Indicates whether the full list of subject alternative names has been included in the response.
+If false, the response includes all of the subject alternative names included in the certificate.
+If true, the response only includes the first 100 subject alternative names included in the certificate.
+
+=head2 ImportedAt => Str
+
+The time at which the certificate was imported.
+This value exists only when the certificate type is IMPORTED.
+
+=head2 InUse => Bool
+
+Indicates whether the certificate is currently associated with an AWS
+resource.
+
+=head2 IssuedAt => Str
+
+The time at which the certificate was issued.
+This value exists only when the certificate type is AMAZON_ISSUED.
+
+=head2 KeyAlgorithm => Str
+
+The algorithm that was used to generate the public-private key pair.
+
+=head2 KeyUsages => ArrayRef[Str|Undef]
+
+A list of Key Usage X.509 v3 extension objects.
+
+=head2 NotAfter => Str
+
+The time at which the certificate expires.
+
+=head2 NotBefore => Str
+
+The time before which the certificate is not valid.
+
+=head2 RenewalEligibility => Str
+
+Indicates whether the certificate is eligible for renewal.
+Valid values: C<ELIGIBLE>, C<INELIGIBLE>.
+
+=head2 RevokedAt => Str
+
+The time at which the certificate was revoked. This value exists only
+when the certificate status is C<REVOKED>.
+
+=head2 Status => Str
+
+The status of the certificate. Valid values: C<PENDING_VALIDATION>, C<ISSUED>, C<INACTIVE>, C<EXPIRED>, C<VALIDATION_TIMED_OUT>, C<REVOKED>, C<FAILED>.
+
+=head2 SubjectAlternativeNameSummaries => ArrayRef[Str|Undef]
+
+A list of Subject Alternative Names (SANs) for the certificate.
+
+=head2 Type => Str
+
+The type of the certificate. Valid values: C<AMAZON_ISSUED>, C<IMPORTED>, C<PRIVATE>.
 
 =head1 SEE ALSO
 
